@@ -1,0 +1,31 @@
+.jk-tabs .content, .jk-tabs nav {
+    float: left;
+    width: 100%;
+}
+
+.jk-tabs nav a {
+    padding: 8px 12px;
+    width: 100%;
+    float: left;
+    text-decoration: none;
+    background: #fff;
+    color: #555;
+    border: 1px solid #ddd;
+}
+
+.jk-tabs nav a:hover {
+    color: #0077a4;
+    text-decoration: none;
+}
+
+.jk-tabs nav a.active {
+    background-color: #00aff0;
+    border-color: #00aff0;
+    color: #fff;
+    text-decoration: none;
+}
+
+img.opengraph {
+    max-width: 480px;
+    max-height: 320px;
+}
