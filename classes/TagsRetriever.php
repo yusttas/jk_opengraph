@@ -84,8 +84,8 @@ class TagsRetriever
     {
 
         $og_tags = array(
-            'title' => $this->title[(int) $id_lang],
-            'description' => $this->description[(int) $id_lang],
+            'title' => $this->page->title[(int) $id_lang],
+            'description' => $this->page->description[(int) $id_lang],
         );
 
         return $og_tags;
