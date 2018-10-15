@@ -186,7 +186,7 @@ class Jk_Opengraph extends Module
             $page->type = 1;
         }
 
-        $tags_retriever=new TagsRetriever($page, $this->context->language->id);
+        $tags_retriever = new TagsRetriever($page, $this->context->language->id);
 
         $tags = $tags_retriever->getOpengraphTags();
 
@@ -439,8 +439,9 @@ class Jk_Opengraph extends Module
             $helper->fields_value['og-description-' . $page->id][(int) $lang['id_lang']] = $page->description[(int) $lang['id_lang']];
         }
 
+        $tags_retriever = new TagsRetriever($page, $this->context->language->id);
         $helper->tpl_vars = array(
-            'image' => $page->getImageUrl(),
+            'image' => $tags_retriever->getImageUrl(),
             'page' => $page->name,
         );
 
