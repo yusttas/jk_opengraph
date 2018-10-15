@@ -56,8 +56,8 @@ class Jk_Opengraph extends Module
     public function uninstall()
     {
         if (!parent::uninstall()
-            || !$this->unistallConfig()
-            || !$this->unistallTables()
+            || !$this->uninstallConfig()
+            || !$this->uninstallTables()
         ) {
             return false;
         }
@@ -144,7 +144,7 @@ class Jk_Opengraph extends Module
         return true;
     }
 
-    public function unistallTables()
+    public function uninstallTables()
     {
 
         $sql1 = "DROP TABLE IF EXISTS `" . _DB_PREFIX_ . "jk_opengraph_tags` ";
@@ -165,7 +165,7 @@ class Jk_Opengraph extends Module
         return true;
     }
 
-    public function unistallConfig()
+    public function uninstallConfig()
     {
 
         Configuration::deleteByName('jk_og_site_name');
