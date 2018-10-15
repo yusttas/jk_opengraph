@@ -4,14 +4,21 @@ class TagsRetriever
 {
 
     private $page;
+    private $id_lang;
 
-    public function __construct(OpenGraphPage $page)
+    public function __construct(OpenGraphPage $page, $id_lang)
     {
 
         $this->page = $page;
+
+        if (!is_int($id_lang)) {
+            throw new Exception('Language id must be integer!');
     }
 
-    public function getOpengraphTags($id_lang)
+        $this->id_lang = $id_lang;
+    }
+
+    public function getOpengraphTags()
     {
 
         $fb_app_id = Configuration::get('jk_og_fb_app_id');
@@ -23,13 +30,13 @@ class TagsRetriever
 
         switch ($this->type) {
             case 1: //use metatags
-                $og_tags = $this->getMetaTags($id_lang);
+                $og_tags = $this->getMetaTags();
                 break;
             case 2: //use individual custom tags
-                $og_tags = $this->getCustomTags($id_lang);
+                $og_tags = $this->getCustomTags();
                 break;
             case 3: //use index custom tags
-                $og_tags = $this->getIndexTags($id_lang, true);
+                $og_tags = $this->getIndexTags(true);
                 break;
         }
 
@@ -45,23 +52,23 @@ class TagsRetriever
         return $tags;
     }
 
-    private function getMetaTags($id_lang)
+    private function getMetaTags()
     {
 
         switch ($this->name) {
             case 'index':
-                $meta_tags = Meta::getHomeMetas($id_lang, $this->name);
+                $meta_tags = Meta::getHomeMetas($this->id_lang, $this->name);
                 break;
             case 'cms':
                 $id_cms = (int) Tools::getValue('id_cms');
-                $meta_tags = MetaCore::getCmsMetas($id_cms, $id_lang, $this->name);
+                $meta_tags = MetaCore::getCmsMetas($id_cms, $this->id_lang, $this->name);
                 break;
             case 'category':
                 $id_category = (int) Tools::getValue('id_category');
-                $meta_tags = Meta::getCategoryMetas($id_category, $id_lang, $this->name);
+                $meta_tags = Meta::getCategoryMetas($id_category, $this->id_lang, $this->name);
                 break;
             default:
-                $meta_tags = Meta::getHomeMetas($id_lang, $this->name);
+                $meta_tags = Meta::getHomeMetas($this->id_lang, $this->name);
                 break;
         }
 
@@ -73,7 +80,7 @@ class TagsRetriever
         return $og_tags;
     }
 
-    private function getCustomTags($id_lang)
+    private function getCustomTags()
     {
 
         $og_tags = array(
@@ -84,14 +91,14 @@ class TagsRetriever
         return $og_tags;
     }
 
-    private function getIndexTags($id_lang)
+    private function getIndexTags()
     {
 
-        $index = new self(1);
+        $index = new OpenGraphPage(1);
 
         $og_tags = array(
-            'title' => $index->title[(int) $id_lang],
-            'description' => $index->description[(int) $id_lang],
+            'title' => $index->title[(int) $this->id_lang],
+            'description' => $index->description[(int) $this->id_lang],
         );
 
         return $og_tags;

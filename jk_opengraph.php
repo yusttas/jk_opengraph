@@ -4,6 +4,7 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
+require_once _PS_MODULE_DIR_ . 'jk_opengraph/classes/TagsRetriever.php';
 require_once _PS_MODULE_DIR_ . 'jk_opengraph/classes/OpenGraphPage.php';
 
 class Jk_Opengraph extends Module
