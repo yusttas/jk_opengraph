@@ -13,7 +13,7 @@ class TagsRetriever
 
         if (!is_int($id_lang)) {
             throw new Exception('Language id must be integer!');
-    }
+        }
 
         $this->id_lang = $id_lang;
     }
@@ -84,8 +84,8 @@ class TagsRetriever
     {
 
         $og_tags = array(
-            'title' => $this->page->title[(int) $id_lang],
-            'description' => $this->page->description[(int) $id_lang],
+            'title' => $this->page->title[(int) $this->id_lang],
+            'description' => $this->page->description[(int) $this->id_lang],
         );
 
         return $og_tags;
