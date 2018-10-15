@@ -186,8 +186,9 @@ class Jk_Opengraph extends Module
             $page->type = 1;
         }
 
-        $id_lang = $this->context->language->id;
-        $tags = $page->getOpengraphTags($id_lang);
+        $tags_retriever=new TagsRetriever($page, $this->context->language->id);
+
+        $tags = $tags_retriever->getOpengraphTags();
 
         $this->context->smarty->assign(
             array(
