@@ -28,7 +28,7 @@ class TagsRetriever
             $site_name = Configuration::get('PS_SHOP_NAME');
         }
 
-        switch ($this->type) {
+        switch ($this->page->type) {
             case 1: //use metatags
                 $og_tags = $this->getMetaTags();
                 break;
@@ -55,20 +55,20 @@ class TagsRetriever
     private function getMetaTags()
     {
 
-        switch ($this->name) {
+        switch ($this->page->name) {
             case 'index':
-                $meta_tags = Meta::getHomeMetas($this->id_lang, $this->name);
+                $meta_tags = Meta::getHomeMetas($this->id_lang, $this->page->name);
                 break;
             case 'cms':
                 $id_cms = (int) Tools::getValue('id_cms');
-                $meta_tags = MetaCore::getCmsMetas($id_cms, $this->id_lang, $this->name);
+                $meta_tags = MetaCore::getCmsMetas($id_cms, $this->id_lang, $this->page->name);
                 break;
             case 'category':
                 $id_category = (int) Tools::getValue('id_category');
-                $meta_tags = Meta::getCategoryMetas($id_category, $this->id_lang, $this->name);
+                $meta_tags = Meta::getCategoryMetas($id_category, $this->id_lang, $this->page->name);
                 break;
             default:
-                $meta_tags = Meta::getHomeMetas($this->id_lang, $this->name);
+                $meta_tags = Meta::getHomeMetas($this->id_lang, $this->page->name);
                 break;
         }
 
@@ -107,12 +107,12 @@ class TagsRetriever
     public function getImageUrl()
     {
 
-        $index = new self(1);
+        $index = new OpenGraphPage(1);
 
-        if ($this->image != '') {
-            $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $this->image); //individual image
-        } elseif ($this->type == 3 && $index->image != '') {
-            $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $index->image); //index image
+        if ($this->page->image != '') {
+            $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $this->page->image); //individual image
+        } elseif ($this->page->type == 3 && $index->image != '') {
+            $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $index->page->image); //index image
         } else {
             $url = _PS_IMG_ . Configuration::get('PS_LOGO'); // shop logo
         }
