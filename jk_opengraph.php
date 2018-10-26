@@ -179,6 +179,8 @@ class Jk_Opengraph extends Module
     {
         $name = $this->context->controller->php_self;
 
+        $excluded = array('product', 'xipblog_single');
+
         /** If module has no settings for this page, use metatags */
         if (!$page = OpenGraphPage::loadByName($name)) {
             $page = new OpenGraphPage();
@@ -193,6 +195,7 @@ class Jk_Opengraph extends Module
         $this->context->smarty->assign(
             array(
                 'name' => $name,
+                'excluded' => $excluded,
                 'tags' => $tags,
             )
         );
