@@ -1,7 +1,7 @@
 {if $tags.fb_app_id}
 <meta property="fb:app_id" content="{$tags.fb_app_id}" /> 
 {/if}
-{if $name!="product"}
+{if !in_array($name, $excluded)}
 <meta property="og:type" content="{$tags.type}" />
 <meta property="og:site_name" content="{$tags.site_name}" />
 <meta property="og:url" content="{$urls.current_url}" />
