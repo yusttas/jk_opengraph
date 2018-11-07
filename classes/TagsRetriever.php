@@ -112,7 +112,7 @@ class TagsRetriever
         if ($this->page->image != '') {
             $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $this->page->image); //individual image
         } elseif ($this->page->type == 3 && $index->image != '') {
-            $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $index->page->image); //index image
+            $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $index->image); //index image
         } else {
             $url = _PS_IMG_ . Configuration::get('PS_LOGO'); // shop logo
         }
