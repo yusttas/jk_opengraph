@@ -414,6 +414,9 @@ class Jk_Opengraph extends Module
             ),
         );
 
+        $tags_retriever = new TagsRetriever($page, $this->context->language->id);
+        $image='<img src='.$tags_retriever->getImageUrl().' style="max-width:300px">';
+
         $fields_form[1]['form'] = array(
             'legend' => array(
                 'title' => $this->l('Open Graph image'),
@@ -423,6 +426,7 @@ class Jk_Opengraph extends Module
                     'type' => 'file',
                     'label' => $this->l('Open Graph: image'),
                     'name' => 'image_' . $page->id,
+                    'image' => $image,
                     'desc' => $this->l('Use images that are at least 1200 x 630 pixels for the best display on high resolution devices. At the minimum, you should use images that are 600 x 315 pixels to display link page posts with larger images. Images can be up to 8MB in size.'),
                 ),
             ),
