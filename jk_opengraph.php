@@ -415,7 +415,7 @@ class Jk_Opengraph extends Module
         );
 
         $tags_retriever = new TagsRetriever($page, $this->context->language->id);
-        $image = '<img src=' . $tags_retriever->getImageUrl() . ' style="max-width:300px">';
+        $image = '<img src=' . Tools::safeOutput($tags_retriever->getImageUrl()) . ' style="max-width:300px">';
 
         $fields_form[1]['form'] = array(
             'legend' => array(
