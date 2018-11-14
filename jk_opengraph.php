@@ -177,7 +177,7 @@ class Jk_Opengraph extends Module
     {
         $name = $this->context->controller->php_self;
 
-        if(in_array($name, $this->excluded)){
+        if (in_array($name, $this->excluded)) {
             return false;
         }
 
@@ -186,6 +186,10 @@ class Jk_Opengraph extends Module
             $page = new OpenGraphPage();
             $page->name = $name;
             $page->type = 1;
+        }
+
+        if ($page->type == 0) {
+            return false;
         }
 
         $tags_retriever = new TagsRetriever($page, $this->context->language->id);
