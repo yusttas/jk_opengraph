@@ -486,6 +486,7 @@ class Jk_Opengraph extends Module
             $this->html .= $this->displayError($error);
         } else {
             $image = $image_name . ".png";
+            $this->deleteImageByName($image);
             if (!move_uploaded_file($_FILES['image_' . $page->id]['tmp_name'], dirname(__FILE__) . DIRECTORY_SEPARATOR . 'views/img' . DIRECTORY_SEPARATOR . $image)) {
                 $this->html .= $this->displayError($this->trans('An error occurred while attempting to upload the file.', array(), 'Admin.Notifications.Error'));
             } else {
@@ -495,5 +496,16 @@ class Jk_Opengraph extends Module
                 $this->html .= $this->displayConfirmation($this->l('Image updated'));
             }
         }
+    }
+
+    public function deleteImageByName($name)
+    {
+
+        $image = _PS_MODULE_DIR_ . $this->name . '/views/img/' . $name;
+        if (@unlink($image)) {
+            return true;
+        }
+
+        return false;
     }
 }
