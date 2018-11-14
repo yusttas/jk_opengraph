@@ -42,7 +42,7 @@ class TagsRetriever
 
         $tags = array(
             'fb_app_id' => $fb_app_id,
-            'type' => 'website',
+            'type' => $this->getType(),
             'site_name' => $site_name,
             'title' => $og_tags['title'],
             'description' => $og_tags['description'],
@@ -91,6 +91,18 @@ class TagsRetriever
         );
 
         return $og_tags;
+    }
+
+    private function getType()
+    {
+
+        if ($this->page->name == 'product') {
+            $type = 'product';
+        } else {
+            $type = 'website';
+        }
+
+        return $type;
     }
 
     public function getImageUrl()
