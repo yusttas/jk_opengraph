@@ -40,11 +40,15 @@ class Jk_Opengraph extends Module
             'name' => 'cms',
             'type' => '1',
         ),
+        array(
+            'id_page' => '6',
+            'name' => 'product',
+            'type' => '1',
+        ),
 
     );
 
     protected $excluded = array(
-        'product',
         'xipblog_single',
     );
 
