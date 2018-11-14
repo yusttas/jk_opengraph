@@ -43,6 +43,11 @@ class Jk_Opengraph extends Module
 
     );
 
+    protected $excluded = array(
+        'product',
+        'xipblog_single',
+    );
+
     public function __construct()
     {
 
@@ -172,8 +177,6 @@ class Jk_Opengraph extends Module
     {
         $name = $this->context->controller->php_self;
 
-        $excluded = array('product', 'xipblog_single');
-
         /** If module has no settings for this page, use metatags */
         if (!$page = OpenGraphPage::loadByName($name)) {
             $page = new OpenGraphPage();
@@ -188,7 +191,7 @@ class Jk_Opengraph extends Module
         $this->context->smarty->assign(
             array(
                 'name' => $name,
-                'excluded' => $excluded,
+                'excluded' => $this->excluded,
                 'tags' => $tags,
             )
         );
