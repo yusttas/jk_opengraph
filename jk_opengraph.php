@@ -12,6 +12,36 @@ class Jk_Opengraph extends Module
 
     protected $active_tab = false;
     protected $html;
+    protected $pages = array(
+        array(
+            'id_page' => '1',
+            'name' => 'index',
+            'type' => '1',
+        ),
+        array(
+            'id_page' => '2',
+            'name' => 'category',
+            'type' => '1',
+        ),
+
+        array(
+            'id_page' => '3',
+            'name' => 'new-products',
+            'type' => '1',
+        ),
+
+        array(
+            'id_page' => '4',
+            'name' => 'best-sales',
+            'type' => '1',
+        ),
+        array(
+            'id_page' => '5',
+            'name' => 'cms',
+            'type' => '1',
+        ),
+
+    );
 
     public function __construct()
     {
@@ -92,48 +122,11 @@ class Jk_Opengraph extends Module
         return true;
     }
 
-    public function getPages()
-    {
-        $pages = array(
-            array(
-                'id_page' => '1',
-                'name' => 'index',
-                'type' => '1',
-            ),
-            array(
-                'id_page' => '2',
-                'name' => 'category',
-                'type' => '1',
-            ),
-
-            array(
-                'id_page' => '3',
-                'name' => 'new-products',
-                'type' => '1',
-            ),
-
-            array(
-                'id_page' => '4',
-                'name' => 'best-sales',
-                'type' => '1',
-            ),
-            array(
-                'id_page' => '5',
-                'name' => 'cms',
-                'type' => '1',
-            ),
-
-        );
-
-        return $pages;
-    }
-
     public function installPages()
     {
-        $pages = $this->getPages();
 
         $values = array();
-        foreach ($pages as $page) {
+        foreach ($this->pages as $page) {
             $values[] = '("' . $page['id_page'] . '", "' . $page['name'] . '", "' . $page['type'] . '")';
         }
 
@@ -211,9 +204,8 @@ class Jk_Opengraph extends Module
      */
     public function checkIfAvailable($name)
     {
-        $pages = $this->getPages();
 
-        foreach ($pages as $page) {
+        foreach ($this->pages as $page) {
             if ($page['name'] == $name) {
                 return true;
             }
