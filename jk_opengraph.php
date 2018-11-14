@@ -226,8 +226,7 @@ class Jk_Opengraph extends Module
             'content' => $this->getGeneralSettingsTemplate(),
         );
 
-        $pages = $this->getPages();
-        foreach ($pages as $page) {
+        foreach ($this->pages as $page) {
             $tabs[] = array(
                 'id' => $page['name'],
                 'title' => $this->l($page['name'] . ' tags'),
@@ -358,6 +357,12 @@ class Jk_Opengraph extends Module
                 'label' => 'Use index tags',
             );
         }
+
+        $type_values[] = array(
+            'id' => 'turn-off-tags-' . $page->id,
+            'value' => '0',
+            'label' => 'Turn off tags',
+        );
 
         $fields_form = array();
         $fields_form[0]['form'] = array(
