@@ -56,19 +56,8 @@ class TagsRetriever
     {
 
         switch ($this->page->name) {
-            case 'index':
-                $meta_tags = Meta::getHomeMetas($this->id_lang, $this->page->name);
-                break;
-            case 'cms':
-                $id_cms = (int) Tools::getValue('id_cms');
-                $meta_tags = MetaCore::getCmsMetas($id_cms, $this->id_lang, $this->page->name);
-                break;
-            case 'category':
-                $id_category = (int) Tools::getValue('id_category');
-                $meta_tags = Meta::getCategoryMetas($id_category, $this->id_lang, $this->page->name);
-                break;
             default:
-                $meta_tags = Meta::getHomeMetas($this->id_lang, $this->page->name);
+                $meta_tags = Meta::getMetaTags($this->id_lang, $this->page->name);
                 break;
         }
 
