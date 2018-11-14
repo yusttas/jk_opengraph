@@ -199,24 +199,6 @@ class Jk_Opengraph extends Module
         return $this->display(__FILE__, 'opengraph.tpl');
     }
 
-    /**
-     * Check if module has settings for this page
-     *
-     * @param string $name name of page
-     * @return bool
-     */
-    public function checkIfAvailable($name)
-    {
-
-        foreach ($this->pages as $page) {
-            if ($page['name'] == $name) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public function getContent()
     {
 
