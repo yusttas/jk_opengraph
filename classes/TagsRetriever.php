@@ -36,7 +36,7 @@ class TagsRetriever
                 $og_tags = $this->getCustomTags();
                 break;
             case 3: //use index custom tags
-                $og_tags = $this->getIndexTags(true);
+                $og_tags = $this->getIndexTags();
                 break;
         }
 
