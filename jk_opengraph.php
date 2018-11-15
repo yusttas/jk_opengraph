@@ -23,13 +23,11 @@ class Jk_Opengraph extends Module
             'name' => 'category',
             'type' => '1',
         ),
-
         array(
             'id_page' => '3',
             'name' => 'new-products',
             'type' => '1',
         ),
-
         array(
             'id_page' => '4',
             'name' => 'best-sales',
@@ -43,9 +41,8 @@ class Jk_Opengraph extends Module
         array(
             'id_page' => '6',
             'name' => 'product',
-            'type' => '1',
+            'type' => '0',
         ),
-
     );
 
     protected $excluded = array(
