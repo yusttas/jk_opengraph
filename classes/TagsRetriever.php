@@ -40,16 +40,18 @@ class TagsRetriever
                 break;
         }
 
-        $tags = array(
+        $main_tags = array(
             'fb_app_id' => $fb_app_id,
-            'type' => $this->getType(),
             'site_name' => $site_name,
+            'site_type' => 'website',
             'title' => $og_tags['title'],
             'description' => $og_tags['description'],
             'image' => $this->getImageUrl(),
         );
 
-        return $tags;
+        $final_tags = $this->addAdditionalTags($main_tags);
+
+        return $final_tags;
     }
 
     private function getMetaTags()
@@ -103,6 +105,29 @@ class TagsRetriever
         }
 
         return $type;
+    }
+
+    private function addAdditionalTags($tags)
+    {
+
+        switch ($this->page->name) {
+            case 'product':
+                $tags['site_type'] = 'product';
+                if ($this->page->type == 1) {
+                    $id_product = (int) Tools::getValue('id_product');
+                    $id_cover = Product::getCover($id_product);
+                    
+                    $id_cover['id_image'] ? $tags['image'] = Context::getContext()->link->getImageLink($id_product, $id_cover['id_image']) : '';
+                }
+                $tags['amount'] = Product::getPriceStatic($id_product);
+                $tags['currency'] = Context::getContext()->currency->iso_code;
+                break;
+
+            default:
+                break;
+        }
+
+        return $tags;
     }
 
     public function getImageUrl()
