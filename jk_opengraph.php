@@ -355,7 +355,7 @@ class Jk_Opengraph extends Module
     {
 
         $type_values = array(
-            array('id' => 'use-meta-tags-' . $page->id, 'value' => '1', 'label' => 'Uset meta tags'),
+            array('id' => 'use-meta-tags-' . $page->id, 'value' => '1', 'label' => 'Use meta tags'),
             array('id' => 'use-custom-tags-' . $page->id, 'value' => '2', 'label' => 'Use custom tags'),
         );
 
