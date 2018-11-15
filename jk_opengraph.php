@@ -9,7 +9,6 @@ require_once _PS_MODULE_DIR_ . 'jk_opengraph/classes/OpenGraphPage.php';
 
 class Jk_Opengraph extends Module
 {
-
     protected $active_tab = false;
     protected $html;
     protected $pages = array(
@@ -51,7 +50,6 @@ class Jk_Opengraph extends Module
 
     public function __construct()
     {
-
         $this->name = 'jk_opengraph';
         $this->tab = 'front_office_features';
         $this->version = '1.2.8';
@@ -70,7 +68,6 @@ class Jk_Opengraph extends Module
 
     public function install()
     {
-
         /* Check that the Multistore feature is enabled, and if so, set the current context to all shops
          * on this installation of PrestaShop. */
 
@@ -130,7 +127,6 @@ class Jk_Opengraph extends Module
 
     public function installPages()
     {
-
         $values = array();
         foreach ($this->pages as $page) {
             $values[] = '("' . $page['id_page'] . '", "' . $page['name'] . '", "' . $page['type'] . '")';
@@ -146,7 +142,6 @@ class Jk_Opengraph extends Module
 
     public function uninstallTables()
     {
-
         $sql1 = "DROP TABLE IF EXISTS `" . _DB_PREFIX_ . "jk_opengraph_tags` ";
         $sql2 = "DROP TABLE IF EXISTS `" . _DB_PREFIX_ . "jk_opengraph_tags_lang` ";
 
@@ -158,7 +153,6 @@ class Jk_Opengraph extends Module
 
     public function installConfig()
     {
-
         Configuration::updateValue('jk_og_site_name', '');
         Configuration::updateValue('jk_og_fb_app_id', '');
 
@@ -167,7 +161,6 @@ class Jk_Opengraph extends Module
 
     public function uninstallConfig()
     {
-
         Configuration::deleteByName('jk_og_site_name');
         Configuration::deleteByName('jk_og_fb_app_id');
 
@@ -210,7 +203,6 @@ class Jk_Opengraph extends Module
 
     public function getContent()
     {
-
         $backoffice_css = __PS_BASE_URI__ . 'modules/' . $this->name . '/views/css/backoffice.css';
 
         $tpl_vars = array(
@@ -226,7 +218,6 @@ class Jk_Opengraph extends Module
 
     protected function getModuleTabs()
     {
-
         $tabs = array();
 
         $tabs[] = array(
@@ -248,7 +239,6 @@ class Jk_Opengraph extends Module
 
     protected function getActiveTab()
     {
-
         if (!$this->active_tab) {
             $this->active_tab = 'general-settings';
         }
@@ -278,7 +268,6 @@ class Jk_Opengraph extends Module
 
     protected function renderGeneralSettingsForm()
     {
-
         $fields_form = array();
 
         $fields_form[0]['form'] = array(
@@ -317,7 +306,6 @@ class Jk_Opengraph extends Module
 
     protected function getOpenGraphTagsTemplate($id_page)
     {
-
         $page = new OpenGraphPage($id_page);
 
         if (Tools::isSubmit('submit-' . $page->name)) {
@@ -337,7 +325,6 @@ class Jk_Opengraph extends Module
 
     public function updateOpenGraphTags($page)
     {
-
         $languages = Language::getLanguages(false);
         foreach ($languages as $lang) {
             $page->title[$lang['id_lang']] = Tools::getValue('og-title-' . $page->id . '_' . $lang['id_lang']);
@@ -353,7 +340,6 @@ class Jk_Opengraph extends Module
 
     public function renderOpenGraphTagsForm($page)
     {
-
         $type_values = array(
             array('id' => 'use-meta-tags-' . $page->id, 'value' => '1', 'label' => 'Use meta tags'),
             array('id' => 'use-custom-tags-' . $page->id, 'value' => '2', 'label' => 'Use custom tags'),
@@ -448,7 +434,6 @@ class Jk_Opengraph extends Module
 
     protected function buildHelper()
     {
-
         $helper = new HelperForm();
 
         $helper->module = $this;
@@ -478,7 +463,6 @@ class Jk_Opengraph extends Module
 
     public function uploadImage($page)
     {
-
         $image_name = "og-" . $page->name;
         $image_maxsize = "8000000";
 
@@ -501,7 +485,6 @@ class Jk_Opengraph extends Module
 
     public function deleteImageByName($name)
     {
-
         $image = _PS_MODULE_DIR_ . $this->name . '/views/img/' . $name;
         if (@unlink($image)) {
             return true;

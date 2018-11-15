@@ -8,7 +8,6 @@ class TagsRetriever
 
     public function __construct(OpenGraphPage $page, $id_lang)
     {
-
         $this->page = $page;
 
         if (!is_int($id_lang)) {
@@ -20,7 +19,6 @@ class TagsRetriever
 
     public function getOpengraphTags()
     {
-
         $fb_app_id = Configuration::get('jk_og_fb_app_id');
         $site_name = Configuration::get('jk_og_site_name');
 
@@ -56,7 +54,6 @@ class TagsRetriever
 
     private function getMetaTags()
     {
-
         switch ($this->page->name) {
             default:
                 $meta_tags = Meta::getMetaTags($this->id_lang, $this->page->name);
@@ -73,7 +70,6 @@ class TagsRetriever
 
     private function getCustomTags()
     {
-
         $og_tags = array(
             'title' => $this->page->title[(int) $this->id_lang],
             'description' => $this->page->description[(int) $this->id_lang],
@@ -84,7 +80,6 @@ class TagsRetriever
 
     private function getIndexTags()
     {
-
         $index = new OpenGraphPage(1);
 
         $og_tags = array(
@@ -97,7 +92,6 @@ class TagsRetriever
 
     private function addAdditionalTags($tags)
     {
-
         switch ($this->page->name) {
             case 'product':
                 $tags['site_type'] = 'product';
@@ -120,7 +114,6 @@ class TagsRetriever
 
     public function getImageUrl()
     {
-
         $index = new OpenGraphPage(1);
 
         if ($this->page->type == 3 && $index->image != '') {
@@ -133,5 +126,4 @@ class TagsRetriever
 
         return $url;
     }
-
 }

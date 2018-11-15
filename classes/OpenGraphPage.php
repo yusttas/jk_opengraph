@@ -33,7 +33,6 @@ class OpenGraphPage extends ObjectModel
      */
     public static function loadByName($name)
     {
-
         $sql = new DbQuery();
         $sql->select('id_page');
         $sql->from('jk_opengraph_tags');
@@ -45,6 +44,4 @@ class OpenGraphPage extends ObjectModel
         }
         return false;
     }
-
-
 }
