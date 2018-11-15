@@ -116,7 +116,7 @@ class TagsRetriever
                 if ($this->page->type == 1) {
                     $id_product = (int) Tools::getValue('id_product');
                     $id_cover = Product::getCover($id_product);
-                    
+
                     $id_cover['id_image'] ? $tags['image'] = Context::getContext()->link->getImageLink($id_product, $id_cover['id_image']) : '';
                 }
                 $tags['amount'] = Product::getPriceStatic($id_product);
@@ -135,10 +135,10 @@ class TagsRetriever
 
         $index = new OpenGraphPage(1);
 
-        if ($this->page->image != '') {
-            $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $this->page->image); //individual image
-        } elseif ($this->page->type == 3 && $index->image != '') {
+        if ($this->page->type == 3 && $index->image != '') {
             $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $index->image); //index image
+        } elseif ($this->page->image != '') {
+            $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $this->page->image); //individual image
         } else {
             $url = _PS_IMG_ . Configuration::get('PS_LOGO'); // shop logo
         }
