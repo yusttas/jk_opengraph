@@ -54,7 +54,7 @@ class Jk_Opengraph extends Module
 
         $this->name = 'jk_opengraph';
         $this->tab = 'front_office_features';
-        $this->version = '1.0.1';
+        $this->version = '1.2.8';
         $this->author = 'yusttas';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
