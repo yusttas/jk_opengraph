@@ -95,18 +95,6 @@ class TagsRetriever
         return $og_tags;
     }
 
-    private function getType()
-    {
-
-        if ($this->page->name == 'product') {
-            $type = 'product';
-        } else {
-            $type = 'website';
-        }
-
-        return $type;
-    }
-
     private function addAdditionalTags($tags)
     {
 
