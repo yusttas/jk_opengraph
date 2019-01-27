@@ -52,7 +52,7 @@ class Jk_Opengraph extends Module
     {
         $this->name = 'jk_opengraph';
         $this->tab = 'front_office_features';
-        $this->version = '1.2.8';
+        $this->version = '1.2.9';
         $this->author = 'yusttas.github.io';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
@@ -251,14 +251,22 @@ class Jk_Opengraph extends Module
         if (Tools::isSubmit('submit-general')) {
 
             $this->active_tab = 'general-settings';
+            $errors = false;
 
             $fb_app_id = Tools::getValue('fb-app-id');
             $site_name = Tools::getValue('site-name');
 
-            Configuration::updateValue('jk_og_fb_app_id', $fb_app_id);
-            Configuration::updateValue('jk_og_site_name', $site_name);
+            if (!is_numeric($fb_app_id) || $fb_app_id <= 0) {
+                $this->html .= $this->displayError($this->l('Facebook App Id should only contain numbers'));
+                $errors = true;
+            }
 
-            $this->html .= $this->displayConfirmation($this->l('Settings updated'));
+            if (!$errors) {
+                Configuration::updateValue('jk_og_fb_app_id', $fb_app_id);
+                Configuration::updateValue('jk_og_site_name', $site_name);
+
+                $this->html .= $this->displayConfirmation($this->l('Settings updated'));
+            }
         }
 
         $template = $this->renderGeneralSettingsForm();
