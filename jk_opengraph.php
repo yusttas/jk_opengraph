@@ -252,7 +252,7 @@ class Jk_Opengraph extends Module
 
             $this->active_tab = 'general-settings';
 
-            $fb_app_id = (int) Tools::getValue('fb-app-id');
+            $fb_app_id = Tools::getValue('fb-app-id');
             $site_name = Tools::getValue('site-name');
 
             Configuration::updateValue('jk_og_fb_app_id', $fb_app_id);
