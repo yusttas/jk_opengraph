@@ -15,5 +15,5 @@
 <meta property="product:price:condition" content="{$tags.product.condition}">
 <meta property="product:price:amount" content="{$tags.product.amount}">
 <meta property="product:price:currency" content="{$tags.product.currency}">
-<meta property="product:product:retailer_item_id" content="{$tags.product.id}">
+<meta property="product:retailer_item_id" content="{$tags.product.id}">
 {/if}
