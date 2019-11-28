@@ -97,12 +97,19 @@ class TagsRetriever
             case 'product':
                 $tags['site_type'] = 'product';
                 $id_product = (int) Tools::getValue('id_product');
+                $product = new Product($id_product, true);
                 if ($this->page->type == OpengraphPage::TYPE_META_TAGS) {
                     $id_cover = Product::getCover($id_product);
                     $id_cover['id_image'] ? $tags['image'] = Context::getContext()->link->getImageLink($id_product, $id_cover['id_image']) : '';
                 }
-                $tags['amount'] = Product::getPriceStatic($id_product);
-                $tags['currency'] = Context::getContext()->currency->iso_code;
+                $tags['product'] = array(
+                    'brand' => Manufacturer::getNameById((int)$product->id_manufacturer),
+                    'availability' => $product->checkQty(StockAvailable::getQuantityAvailableByProduct($id_product, 0)) ? 'in stock' : 'out of stock',
+                    'condition' => $product->condition,
+                    'amount' => Product::getPriceStatic($id_product, true, null, 2),
+                    'currency' => Context::getContext()->currency->iso_code,
+                    'id' => $id_product,  
+                );
                 break;
 
             default:

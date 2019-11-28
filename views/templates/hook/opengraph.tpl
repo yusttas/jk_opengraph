@@ -8,6 +8,12 @@
 <meta property="og:description" content="{$tags.description}" />
 <meta property="og:image" content="{$urls.shop_domain_url}{$tags.image}" />
 {if $tags.site_type=='product'}
-<meta property="product:price:amount" content="{$tags.amount}">
-<meta property="product:price:currency" content="{$tags.currency}">
+{if $tags.product.brand}
+<meta property="product:brand" content="{$tags.product.brand}">
+{/if}
+<meta property="product:availability" content="{$tags.product.availability}">
+<meta property="product:price:condition" content="{$tags.product.condition}">
+<meta property="product:price:amount" content="{$tags.product.amount}">
+<meta property="product:price:currency" content="{$tags.product.currency}">
+<meta property="product:product:retailer_item_id" content="{$tags.product.id}">
 {/if}
