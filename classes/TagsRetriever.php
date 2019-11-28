@@ -96,10 +96,9 @@ class TagsRetriever
         switch ($this->page->name) {
             case 'product':
                 $tags['site_type'] = 'product';
+                $id_product = (int) Tools::getValue('id_product');
                 if ($this->page->type == OpengraphPage::TYPE_META_TAGS) {
-                    $id_product = (int) Tools::getValue('id_product');
                     $id_cover = Product::getCover($id_product);
-
                     $id_cover['id_image'] ? $tags['image'] = Context::getContext()->link->getImageLink($id_product, $id_cover['id_image']) : '';
                 }
                 $tags['amount'] = Product::getPriceStatic($id_product);
