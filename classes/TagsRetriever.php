@@ -1,8 +1,9 @@
 <?php
 
+require_once _PS_MODULE_DIR_ . 'jk_opengraph/classes/OpenGraphPage.php';
+
 class TagsRetriever
 {
-
     private $page;
     private $id_lang;
 
@@ -27,13 +28,13 @@ class TagsRetriever
         }
 
         switch ($this->page->type) {
-            case 1: //use metatags
+            case OpenGraphPage::TYPE_META_TAGS:
                 $og_tags = $this->getMetaTags();
                 break;
-            case 2: //use individual custom tags
+            case OpenGraphPage::TYPE_CUSTOM_TAGS:
                 $og_tags = $this->getCustomTags();
                 break;
-            case 3: //use index custom tags
+            case OpenGraphPage::TYPE_INDEX_TAGS:
                 $og_tags = $this->getIndexTags();
                 break;
         }
@@ -95,7 +96,7 @@ class TagsRetriever
         switch ($this->page->name) {
             case 'product':
                 $tags['site_type'] = 'product';
-                if ($this->page->type == 1) {
+                if ($this->page->type == OpengraphPage::TYPE_META_TAGS) {
                     $id_product = (int) Tools::getValue('id_product');
                     $id_cover = Product::getCover($id_product);
 
@@ -116,7 +117,7 @@ class TagsRetriever
     {
         $index = new OpenGraphPage(1);
 
-        if ($this->page->type == 3 && $index->image != '') {
+        if ($this->page->type == OpengraphPage::TYPE_INDEX_TAGS && $index->image != '') {
             $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $index->image); //index image
         } elseif ($this->page->image != '') {
             $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $this->page->image); //individual image

@@ -2,15 +2,16 @@
 
 class OpenGraphPage extends ObjectModel
 {
-
     public $id_page;
     public $id_lang;
     public $name;
     public $title;
     public $description;
     public $image;
-    /** @var int 1-metatags, 2-custom tags, 3-index page tags*/
     public $type;
+    const TYPE_META_TAGS = 1;
+    const TYPE_CUSTOM_TAGS = 2;
+    const TYPE_INDEX_TAGS = 3;
 
     /**
      * @see ObjectModel::$definition
