@@ -471,7 +471,8 @@ class Jk_Opengraph extends Module
 
     public function uploadImage($page)
     {
-        $image_name = "og-" . $page->name;
+        $date = new DateTime();
+        $image_name = "og-" . $page->name . '-' . $date->getTimestamp();
         $image_maxsize = "8000000";
 
         if ($error = ImageManager::validateUpload($_FILES['image_' . $page->id], $image_maxsize)) {
@@ -479,7 +480,7 @@ class Jk_Opengraph extends Module
             $this->html .= $this->displayError($error);
         } else {
             $image = $image_name . ".png";
-            $this->deleteImageByName($image);
+            $this->deleteImageByName($page->image);
             if (!move_uploaded_file($_FILES['image_' . $page->id]['tmp_name'], dirname(__FILE__) . DIRECTORY_SEPARATOR . 'views/img' . DIRECTORY_SEPARATOR . $image)) {
                 $this->html .= $this->displayError($this->trans('An error occurred while attempting to upload the file.', array(), 'Admin.Notifications.Error'));
             } else {

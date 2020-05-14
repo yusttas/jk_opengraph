@@ -1,12 +1,14 @@
 {if $tags.fb_app_id}
-<meta property="fb:app_id" content="{$tags.fb_app_id}" />
+<meta property="fb:app_id" content="{$tags.fb_app_id}">
 {/if}
-<meta property="og:type" content="{$tags.site_type}" />
-<meta property="og:site_name" content="{$tags.site_name}" />
-<meta property="og:url" content="{$urls.current_url}" />
-<meta property="og:title" content="{$tags.title}" />
-<meta property="og:description" content="{$tags.description}" />
-<meta property="og:image" content="{$urls.shop_domain_url}{$tags.image}" />
+<meta property="og:type" content="{$tags.site_type}">
+<meta property="og:site_name" content="{$tags.site_name}">
+<meta property="og:locale" content="{$language.iso_code}">
+<meta property="og:url" content="{$urls.current_url}">
+<meta property="og:title" content="{$tags.title}">
+<meta property="og:description" content="{$tags.description}">
+<meta property="og:image" content="{$urls.shop_domain_url}{$tags.image}">
+<meta property="og:image:alt" content="{$tags.site_name} - {$tags.title}">
 {if $tags.site_type=='product'}
 {if $tags.product.brand}
 <meta property="product:brand" content="{$tags.product.brand}">
