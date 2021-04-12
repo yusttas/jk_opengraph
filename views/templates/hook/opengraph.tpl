@@ -7,7 +7,7 @@
 <meta property="og:url" content="{$urls.current_url}">
 <meta property="og:title" content="{$tags.title}">
 <meta property="og:description" content="{$tags.description}">
-<meta property="og:image" content="{$urls.shop_domain_url}{$tags.image}">
+<meta property="og:image" content="{$tags.image}">
 <meta property="og:image:alt" content="{$tags.site_name} - {$tags.title}">
 {if $tags.site_type=='product'}
 {if $tags.product.brand}
