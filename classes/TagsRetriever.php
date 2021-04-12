@@ -100,7 +100,7 @@ class TagsRetriever
                 $product = new Product($id_product, true);
                 if ($this->page->type == OpengraphPage::TYPE_META_TAGS) {
                     $id_cover = Product::getCover($id_product);
-                    $id_cover['id_image'] ? $tags['image'] = Context::getContext()->link->getImageLink($id_product, $id_cover['id_image']) : '';
+                    $id_cover['id_image'] ? $tags['image'] = Context::getContext()->link->getImageLink($product->link_rewrite[Context::getContext()->language->id], $id_cover['id_image'], ImageType::getFormatedName('large')) : '';
                 }
                 $tags['product'] = array(
                     'brand' => Manufacturer::getNameById((int)$product->id_manufacturer),
@@ -122,14 +122,16 @@ class TagsRetriever
     public function getImageUrl()
     {
         $index = new OpenGraphPage(1);
-
-        if ($this->page->type == OpengraphPage::TYPE_INDEX_TAGS && $index->image != '') {
-            $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $index->image); //index image
-        } elseif ($this->page->image != '') {
+        
+        if ($this->page->image != '') {
             $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $this->page->image); //individual image
+        } elseif ($index->image) {
+            $url = Media::getMediaPath(_PS_MODULE_DIR_ . 'jk_opengraph/views/img/' . $index->image); //index image
         } else {
             $url = _PS_IMG_ . Configuration::get('PS_LOGO'); // shop logo
         }
+
+        $url = _PS_BASE_URL_ . $url; //add base url
 
         return $url;
     }
